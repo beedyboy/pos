@@ -212,7 +212,7 @@
  <?php
 }
 	?>
-	<button class="sendHighlighted">Finish</button>
+	<button class="sendHighlighted btn-info btn-block" style="border-radius: 5px; padding: 5px; margin-top: 5px">Finish</button>
 			</div>
 		<!-- local dishes ends up here -->	
 			<!-- Bar drinks starts don here -->
