@@ -27,11 +27,15 @@ $active = "SalesReport";
 				</div>
 		 
 		 	<!--and main body here-->
-	
+	<div class="row" > 
 <div class="col-sm-12 col-md-12" style="margin-top: -19px; margin-bottom: 21px;">
+ <div class="col-sm-3 col-md-2 " >
 <a  href="index.php" class="" >
-	<button class="col-sm-3 col-md-2 btn btn-default btn-large smartColor" style="float: left;">
-<i class="icon icon-circle-arrow-left icon-large"></i> Back</button></a>
+	<button class=" btn btn-default btn-large smartColor" style="float: left;">
+		<i class="icon icon-circle-arrow-left icon-large"></i> Back</button></a>
+	
+</div>
+
 		
 		<div class="col-sm-12 col-md-12" style="text-align:center;">
 		
@@ -60,7 +64,9 @@ $active = "SalesReport";
 		</div>
 		
 </div>
+</div>
 
+	<div class="row" > 
 	<div class="col-sm-12 col-md-12" > 
  <div class="col-sm-9 col-md-10" style="text-align:center;">
 		
@@ -74,6 +80,7 @@ To: <input type="text"   style="width: 223px; height:30px; padding:8px;" name="d
 				</div>
 <center>Sales Report from&nbsp; <mark><?php echo $_GET['d1'] ?></mark>&nbsp;to&nbsp;<mark><?php echo $_GET['d2'] ?></mark>
 </center>
+	  </div>
 	  </div>
 
 
