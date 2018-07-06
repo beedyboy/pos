@@ -1644,8 +1644,63 @@ return false;
 
 
 } );  
-		
 	 
+		
+	  //clearBalances
+ 	 $(document).on('click', '.clearBalances', function(){ 
+		$.ajax({
+			url:"clearBalances.php", 	 
+			 success:function(data)
+			{   
+			  $('.beedy-kaydee-popup-content').html(data);
+			 		showMod();
+			 
+			 }
+		 });
+	});
+
+$( document ).on( "submit", ".payAllBalances", function(evt) {  
+var _this = $(evt.target);
+evt.preventDefault();
+var formdata = $(_this).serialize();
+$(_this).find(':input').attr('disabled',true);
+$(_this).find(':button').attr('disabled',false);
+$(_this).find(':button').html('<p>connecting to the server......</p>'); 
+$.ajax({
+url: "actions.php",
+type: "POST",
+data: formdata, 
+success: function(result){  
+	if(result == 1)
+	{ 
+		$("#receivableTable").DataTable().destroy();
+		fetch_receivable_data(); 
+		receivableTotal(); 
+		destroyPopUp();
+	}
+  else if(result == 10)
+  {
+$("#add-bottom").removeClass('hide').addClass('alert-danger').html('<p><i class="fa fa-exclamation-triangle"></i>Error: You must be logged in to perform this transaction.</p>');
+$(_this).find(':input').attr('disabled',false);
+$(_this).find(':button').attr('disabled',false);
+$(_this).find(':button').html('<i class="icon icon-save icon-large"></i> Save');
+ } 
+else  
+{
+$("#add-bottom").removeClass('hide').addClass('alert-danger').html('<p><i class="fa fa-exclamation-triangle"></i>Error: Transaction could not be completed!!! Please try again later.</p>');
+$(_this).find(':input').attr('disabled',false);
+$(_this).find(':button').attr('disabled',false);
+$(_this).find(':button').html('<i class="icon icon-save icon-large"></i> Save Transaction');
+ }
+
+} 
+
+});
+ 
+
+
+} ); 
+
  
 function getseatTable(evt){
 var _this = $(evt.target);

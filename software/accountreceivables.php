@@ -29,21 +29,36 @@ $active = "Account Receivables";
 		 	<!--and main body here-->
 	
 <div class="col-sm-12 col-md-12" style="margin-top: -19px; margin-bottom: 21px;">
+<div class="row">
+ <div class="col-sm-3 col-md-2 " >
 <a  href="index.php" class="" >
-	<button class="col-sm-3 col-md-2 btn btn-default btn-large smartColor" style="float: left;">
-<i class="icon icon-circle-arrow-left icon-large"></i> Back</button></a>
-	 
- <div class="col-sm-9 col-md-10" style="text-align:center;">
+	<button class=" btn btn-default btn-large smartColor" style="float: left;">
+		<i class="icon icon-circle-arrow-left icon-large"></i> Back</button></a>
+	
+</div>
+
+	 <div class="col-sm-3 col-md-2 " >
+	 <a rel="facebox" href="paidInvoice.php" class="btn btn-success btn-large ">  Paid Invoice</a>
+</div>	
+
+  <div class="col-sm-3 col-md-2 " >
+  <button class="btn btn-success btn-large smartColor  clearBalances"  data-toggle="tooltip" title="Pay All" style="height:35px;">
+	<i class="icon-plus-sign icon-large"></i> Pay All</button> 
+</div>	
+
+ <div class="col-sm-3 col-md-2 " >
 	<a href="javascript:Clickheretoprint()" style="float:right; font-size:20px;"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
 	
 			</div>
-	  
+	  </div>
 
 </div>
+
+
 <div class="col-sm-12 col-md-12" style=" margin-bottom: 21px;">
-<div class="col-sm-9 col-md-10" style="text-align:center;">
+<!-- <div class="col-sm-9 col-md-10" style="text-align:center;">
 	 <a rel="facebox" href="paidInvoice.php" class="btn btn-success btn-large ">  Paid Invoice</a>
-</div>	
+</div>	 -->
 
 
 <div class="col-sm-12 col-md-12">

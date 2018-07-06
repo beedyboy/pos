@@ -32,6 +32,7 @@ if($_POST['action'] == "saveSales"){ echo System::saveOrder();}
 if($_POST['action'] == "addToOrder"){ echo System::addToOrder();} 
 if($_POST['action'] == "saveKitchenOrder"){ echo System::saveKitchenOrder();} 
 if($_POST['action'] == "payButton"){ echo System::payButton($_POST['transaction_id']);} 
+if($_POST['action'] == "payAllBalances"){ echo System::payAllBalances();} 
 if($_POST['action'] == "printOrder"){ echo System::printOrder($_POST['id']);} 
 if($_POST['action'] == "cancelOrder"){ echo System::cancelOrder($_POST['id'], $_POST['tid']);} 
 if($_POST['action'] == "cancelSoldOrder"){ echo System::cancelSoldOrder();} 

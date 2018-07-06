@@ -324,6 +324,13 @@ $select->execute();
 return $select;
 } 
 
+public static function loadDistinctKitchens(){
+$conn = Database::getInstance();
+$select = $conn->db->prepare("SELECT DISTINCT kitchen FROM sales WHERE status = 'PENDING' ");
+$select->execute();
+return $select;
+} 
+
 public static function loadHallTbl(){
 $conn = Database::getInstance();
 $select = $conn->db->prepare("SELECT * FROM htables ORDER BY tid DESC");
@@ -1848,6 +1855,32 @@ $updateClass->bindParam(':id', $transaction_id, PDO::PARAM_INT);
 if($updateClass->execute()){return 'Transaction Completed';} else {return "Error: Please try again later";} 
 else:
 return "Please log in to perform this transaction";
+endif;
+} 
+
+
+
+
+public static function payAllBalances(){
+$conn = Database::getInstance();
+ global $GetSession;
+ $status ="PAID";
+ $pend ="PENDING";
+if($GetSession->loggedin== TRUE):  
+    if($_POST['kitchen'] == "ALL"): 
+
+      $updateClass = $conn->db->prepare("UPDATE sales SET status=:name WHERE status=:pend ");
+      $updateClass->bindParam(':name', $status, PDO::PARAM_STR); 
+      $updateClass->bindParam(':pend', $pend, PDO::PARAM_STR); 
+      if($updateClass->execute()): return 1; else: return 0; endif; 
+    else:
+        $updateClass = $conn->db->prepare("UPDATE sales SET status=:name WHERE kitchen=:id ");
+        $updateClass->bindParam(':name', $status, PDO::PARAM_STR); 
+        $updateClass->bindParam(':id', $_POST['kitchen'], PDO::PARAM_STR);
+        if($updateClass->execute()): return 1; else: return 0; endif;
+   endif;
+else:
+  return 10;
 endif;
 } 
 
