@@ -321,9 +321,6 @@ padding:0px;
  
 /**** TABS STYLES ****/
  
-div.bd-tab-container h3 {
-}
- 
  
 ul.bd-tab {
  background: #F5F6F7;
@@ -334,8 +331,6 @@ border-top-left-radius:5px;
 -webkit-border-top-left-radius:5px;
 }
  
-ul.bd-tab li {
-}
  
 ul.bd-tab li a { 
 text-decoration: none;
@@ -441,9 +436,6 @@ border-right:1px solid #ccc;
 }
  
  
- 
- .quantity { 
-}
 .quantity input {
   -webkit-appearance: none;
   border: none;
@@ -502,6 +494,8 @@ input:focus {
     background-color: #ccc;
 }
 
+
+
 .accordion:after {
     content: '\002B';
     color: #777;
@@ -520,4 +514,8 @@ input:focus {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+}
+
+.actives{
+	display: block;
 }

@@ -94,17 +94,17 @@
 		<!-- tab links-->
 		<ul class="bd-tab">
 			
-			<li class="bd-tab-link active"> 
-			<a href="#" id="C"  class=""> 
-	Continental
-</a></li>
+ <li class="bd-tab-link active"> 
+			<a href="#" id="C"  class="">  Continental </a>
+</li>
 			
-		 <li class="bd-tab-link"><a href="#" id="L"  class="beedytablinks"> 
-	Local Dishes
-</a></li>
+		 <li class="bd-tab-link">
+		 <a href="#" id="L"  class="beedytablinks"> Local Dishes </a>
+</li>
 
 
-<li class="bd-tab-link"> <a href="#" id="D"  class="beedytablinks"> 
+<li class="bd-tab-link"> 
+<a href="#" id="D"  class="beedytablinks"> 
 	Bar
 </a>
 </li>
@@ -130,9 +130,8 @@
 	<!-- tab contents goes here -->
 		
 		<div class="bd-tab-content">
-			
-			<!-- continental tab panel starts down here -->
-			<div class="bd-tab-panel active" data-index="0">
+	 			<!-- continental tab panel starts down here -->
+				 <div class="bd-tab-panel active" data-index="0">
 			<?php 
 
 			$subCategory = System::loadDistinctWhere('subId',  'products', 'main', 'C');

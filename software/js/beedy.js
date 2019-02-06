@@ -790,7 +790,7 @@ $.ajax({
 	url:'actions.php',
 	type: 'POST',
 	data: formdata,
-	success: function( result ){ 
+	success: function( result ){  
 		 if(result == 1) { 
 	
  	var action =  "refreshInvoive";

@@ -1441,10 +1441,7 @@ if($GetSession->loggedin== TRUE):
 
 $stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, tid, sid, hall, balance, ord_type, kitchen) 
  VALUES (:invoice_number, :cashier, :date, :amount, :discount, :tid, :sid,:hall, :balance, :ord_type, :kitchen)"); 
-
-
-
-
+ 
  
  $stmt->bindParam(':invoice_number', $_POST['invoice'], PDO::PARAM_STR); 
 $stmt->bindParam(':cashier', $_POST['cashier'], PDO::PARAM_STR); 
@@ -1468,15 +1465,13 @@ if ($stmt->execute()):
 		
 		for($i=1; $row= $loadTblCond->fetch();  $i++){
 			
-   $made = self::existOne('printer', 'trans_id', $row['transaction_id']);
+//    $made = self::existOne('printer', 'trans_id', $row['transaction_id']);
  
- if($made < 1):
-			$pnt = $conn->db->prepare("INSERT INTO printer (trans_id)  VALUES (:trans_id)"); 
-			$pnt->bindParam(':trans_id', $row['transaction_id'], PDO::PARAM_INT); 
-			$pnt->execute();
-			
-   
-   endif;
+//  if($made < 1):
+// 			$pnt = $conn->db->prepare("INSERT INTO printer (trans_id)  VALUES (:trans_id)"); 
+// 			$pnt->bindParam(':trans_id', $row['transaction_id'], PDO::PARAM_INT); 
+// 			$pnt->execute(); 
+//    endif;
 			
 		}
  

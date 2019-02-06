@@ -168,12 +168,13 @@ echo System::formatMoney(  $row['amount'], true); //amt
 </td>	</tr>
 
 							 <?php		
-									}
+				$fgfg =0 ;
+								}
 
 							 ?>
 	<tr class="tabletitle">
 								<td></td>
-								<td colspan="4"  style=" text-align:right;" class="Rate"> Total: 
+								<td colspan="4"  style=" text-align:right;" class="Rate"> Subtotal: 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
 								<td  colspan="2" class="payment"><?php
 					$sdsd=$_GET['id'];
@@ -186,7 +187,54 @@ echo System::formatMoney(  $row['amount'], true); //amt
 					?></h2></td>
 							</tr>
 							 
-
+						 
+							<tr class="tabletitle">
+								<td></td>
+								<td colspan="4"  style=" text-align:right;" class="Rate"> NHIL (2.5%): 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
+								<td  colspan="2" class="payment"><?php
+					 $nhilPercentage = 2.5;
+					 $nhil = ($nhilPercentage / 100) * $fgfg;
+					//  $val = $nhil * $fgfg;
+					echo System::formatMoney($nhil, true); ?>
+					</h2></td>
+							</tr>
+							 
+							<tr class="tabletitle">
+								<td></td>
+								<td colspan="4"  style=" text-align:right;" class="Rate"> Get Fund Levy (2.5%): 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
+								<td  colspan="2" class="payment"><?php
+					 $nhil = 0.025;
+					 $val = $nhil * $fgfg;
+					echo System::formatMoney($val, true); ?>
+					</h2></td>
+							</tr>
+						 
+					<tr class="tabletitle">
+								<td></td>
+								<td colspan="4"  style=" text-align:right;" class="Rate"> VAT (12.5%): 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
+								<td  colspan="2" class="payment"><?php
+					$vatPercentage = 12.5;
+					$vat = ($vatPercentage / 100) * $fgfg;
+					echo System::formatMoney($vat, true); ?>
+					</h2></td>
+							</tr>
+							<tr class="tabletitle">
+								<td></td>
+								<td colspan="4"  style=" text-align:right;" class="Rate"> Grand total: 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
+								<td  colspan="2" class="payment"><?php
+					$sdsd=$_GET['id'];
+					 
+					$resultas = System::amountSumSalesOrder($sdsd); 
+					for($i=0; $rowas = $resultas->fetch(); $i++){
+					$fgfg=$rowas['sum(amount)'];
+					echo System::formatMoney($fgfg, true);
+					}
+					?></h2></td>
+							</tr>	 
 						 
 			
 		</tbody>
