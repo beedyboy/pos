@@ -108,8 +108,8 @@ INSERT INTO products VALUES ('20','Fufu 5','5','33','L','13','5','1');
 INSERT INTO products VALUES ('21','Vodka','12','50','D','11','12','1');
 INSERT INTO products VALUES ('22','Red Red / Egg','15','30','SM','25','15','1');
 INSERT INTO products VALUES ('23','Jollof / Grilled Pork','30','34','C','9','30','1');
-INSERT INTO products VALUES ('24','Cassava Fish','35','16','F','16','35','1');
-INSERT INTO products VALUES ('26','Coke','5','40','D','21','5','1');
+INSERT INTO products VALUES ('24','Cassava Fish','35','15','F','16','35','1');
+INSERT INTO products VALUES ('26','Coke','5','39','D','21','5','1');
 INSERT INTO products VALUES ('27','Tuna Salad','20','41','C','24','20','1');
 INSERT INTO products VALUES ('28','Rice Ball','2','50','L','23','2','1');
 INSERT INTO products VALUES ('29','Salted Beef','4','50','L','20','4','1');
@@ -118,7 +118,7 @@ INSERT INTO products VALUES ('37','Fanta','5','52','D','21','5','1');
 INSERT INTO products VALUES ('39','Club L','8','104','D','22','8','1');
 INSERT INTO products VALUES ('40','Club M','6','49','D','22','6','1');
 INSERT INTO products VALUES ('41','Sprite ','5','9666','D','21','5','1');
-INSERT INTO products VALUES ('42','Red Bull','10','51','D','11','10','1');
+INSERT INTO products VALUES ('42','Red Bull','10','50','D','11','10','1');
 INSERT INTO products VALUES ('43','Sprite','5','33','D','21','5','1');
 INSERT INTO products VALUES ('44','Gulder L','8','12','D','11','8','1');
 INSERT INTO products VALUES ('45','Star L','8','10','D','11','8','1');
@@ -166,6 +166,9 @@ CREATE TABLE `sales` (
   `sid` int(11) DEFAULT NULL,
   `hall` int(11) DEFAULT NULL,
   `ord_type` varchar(30) DEFAULT NULL,
+  `nhil` varchar(30) DEFAULT NULL,
+  `fund` varchar(30) DEFAULT NULL,
+  `vat` varchar(30) DEFAULT NULL,
   `kitchen` varchar(20) NOT NULL DEFAULT 'Bar',
   PRIMARY KEY (`transaction_id`),
   KEY `tid` (`tid`),
@@ -178,52 +181,54 @@ CREATE TABLE `sales` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --INSERTING DATA INTO sales
-INSERT INTO sales VALUES ('1','RS-9023532','Admin','2018-03-02','98','0','98','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('2','RS-330033','Admin','2018-03-02','113','0','113','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('3','RS-02022','Admin','2018-03-02','22','0','22','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('4','RS-99038','Admin','2018-03-02','27','0','27','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('5','RS-3922322','Admin','2018-03-13','22','0','22','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('6','RS-020293','Admin','2018-03-14','20','0','20','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('7','RS-3932022','Admin','2018-03-14','3','0','3','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('11','RS-302320','Admin','2018-03-14','28','0','28','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('12','RS-8382223','Ernest Ansah','2018-03-14','1','4','1','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('13','RS-23020403','Ernest Ansah','2018-03-14','23','2','23','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('18','RS-3723033','Ernest Ansah','2018-03-14','4','0','4','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('19','RS-22330','Admin','2018-03-14','12','0','12','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('20','RS-0300380','Admin','2018-03-14','98','0','98','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('21','RS-322303','Waiter','2018-03-14','10','0','10','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('22','RS-023','Waiter','2018-03-14','30','0','30','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('23','RS-20323900','Waiter','2018-03-14','22','0','22','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('24','RS-23323233','Waiter','2018-03-14','15','0','15','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('25','RS-3300333','Waiter','2018-03-14','5','0','5','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('26','RS-043423','Waiter','2018-03-14','15','0','15','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('27','RS-2503232','Waiter','2018-03-14','25','0','25','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('28','RS-9000425','Ernest Ansah','2018-03-26','56','0','56','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('29','RS-23433333','Ernest Ansah','2018-03-26','56','0','56','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('30','RS-3223223','Ernest Ansah','2018-03-26','','','','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('31','RS-3232226','Ernest Ansah','2018-03-26','16','0','16','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('32','RS-532820','Cashier','2018-03-26','29','0','29','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('33','RS-32903','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('34','RS-3233532','Cashier','2018-03-26','','','','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('35','RS-2050330','Cashier','2018-03-26','','','','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('36','RS-302838','Cashier','2018-03-26','','','','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('37','RS-2022263','Cashier','2018-03-26','','','','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('38','RS-809305','Cashier','2018-03-26','2','0','2','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('39','RS-29070','Cashier','2018-03-26','16','0','16','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('40','RS-20220','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('41','RS-73053','Cashier','2018-03-26','5','0','5','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('42','RS-2236932','Cashier','2018-03-26','12','0','12','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('43','RS-33750202','Cashier','2018-03-26','8','0','8','PAID','2','2','3','','Bar');
-INSERT INTO sales VALUES ('44','RS-336823','Cashier','2018-03-26','2','0','2','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('45','RS-333900','Cashier','2018-03-26','6','0','6','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('46','RS-3000333','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('48','RS-2394342','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('49','RS-25003','Cashier','2018-03-26','5','0','5','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('50','RS-320203','Cashier','2018-03-26','','','','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('51','RS-03323223','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('52','RS-042024','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','Bar');
-INSERT INTO sales VALUES ('53','RS-076000','ADMINISTRATOR','2019-02-06','90','','90','PENDING','11','7','6','Take In','Continental');
-INSERT INTO sales VALUES ('54','RS-402033','ADMINISTRATOR','2019-02-06','60','','60','PENDING','','','','Take-Out','Bar');
+INSERT INTO sales VALUES ('1','RS-9023532','Admin','2018-03-02','98','0','98','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('2','RS-330033','Admin','2018-03-02','113','0','113','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('3','RS-02022','Admin','2018-03-02','22','0','22','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('4','RS-99038','Admin','2018-03-02','27','0','27','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('5','RS-3922322','Admin','2018-03-13','22','0','22','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('6','RS-020293','Admin','2018-03-14','20','0','20','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('7','RS-3932022','Admin','2018-03-14','3','0','3','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('11','RS-302320','Admin','2018-03-14','28','0','28','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('12','RS-8382223','Ernest Ansah','2018-03-14','1','4','1','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('13','RS-23020403','Ernest Ansah','2018-03-14','23','2','23','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('18','RS-3723033','Ernest Ansah','2018-03-14','4','0','4','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('19','RS-22330','Admin','2018-03-14','12','0','12','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('20','RS-0300380','Admin','2018-03-14','98','0','98','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('21','RS-322303','Waiter','2018-03-14','10','0','10','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('22','RS-023','Waiter','2018-03-14','30','0','30','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('23','RS-20323900','Waiter','2018-03-14','22','0','22','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('24','RS-23323233','Waiter','2018-03-14','15','0','15','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('25','RS-3300333','Waiter','2018-03-14','5','0','5','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('26','RS-043423','Waiter','2018-03-14','15','0','15','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('27','RS-2503232','Waiter','2018-03-14','25','0','25','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('28','RS-9000425','Ernest Ansah','2018-03-26','56','0','56','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('29','RS-23433333','Ernest Ansah','2018-03-26','56','0','56','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('30','RS-3223223','Ernest Ansah','2018-03-26','','','','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('31','RS-3232226','Ernest Ansah','2018-03-26','16','0','16','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('32','RS-532820','Cashier','2018-03-26','29','0','29','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('33','RS-32903','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('34','RS-3233532','Cashier','2018-03-26','','','','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('35','RS-2050330','Cashier','2018-03-26','','','','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('36','RS-302838','Cashier','2018-03-26','','','','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('37','RS-2022263','Cashier','2018-03-26','','','','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('38','RS-809305','Cashier','2018-03-26','2','0','2','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('39','RS-29070','Cashier','2018-03-26','16','0','16','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('40','RS-20220','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('41','RS-73053','Cashier','2018-03-26','5','0','5','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('42','RS-2236932','Cashier','2018-03-26','12','0','12','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('43','RS-33750202','Cashier','2018-03-26','8','0','8','PAID','2','2','3','','','','','Bar');
+INSERT INTO sales VALUES ('44','RS-336823','Cashier','2018-03-26','2','0','2','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('45','RS-333900','Cashier','2018-03-26','6','0','6','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('46','RS-3000333','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('48','RS-2394342','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('49','RS-25003','Cashier','2018-03-26','5','0','5','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('50','RS-320203','Cashier','2018-03-26','','','','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('51','RS-03323223','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('52','RS-042024','Cashier','2018-03-26','8','0','8','PAID','1','1','3','','','','','Bar');
+INSERT INTO sales VALUES ('53','RS-076000','ADMINISTRATOR','2019-02-06','90','','90','PAID','11','7','6','Take In','','','','Continental');
+INSERT INTO sales VALUES ('54','RS-402033','ADMINISTRATOR','2019-02-06','60','','60','PENDING','','','','Take-Out','','','','Bar');
+INSERT INTO sales VALUES ('55','RS-0243050','ADMINISTRATOR','2019-02-09','47','','47','PENDING','','','','Take-Out','','','','Bar');
+INSERT INTO sales VALUES ('56','RS-399042','ADMINISTRATOR','2019-02-09','50','','50','PAID','2','1','6','Take In','1.25','1.25','6.25','Continental');
 
 
 
@@ -258,6 +263,12 @@ INSERT INTO sales_order VALUES ('12','RS-076000','1','30','80','30','','','02/06
 INSERT INTO sales_order VALUES ('13','RS-076000','1','30','79','30','','','02/06/19','1');
 INSERT INTO sales_order VALUES ('14','RS-402033','1','25','71','25','','','02/06/19','1');
 INSERT INTO sales_order VALUES ('15','RS-402033','1','35','72','35','','','02/06/19','1');
+INSERT INTO sales_order VALUES ('16','RS-0243050','1','15','22','15','','','02/09/19','2');
+INSERT INTO sales_order VALUES ('17','RS-0243050','2','30','19','15','','','02/09/19','2');
+INSERT INTO sales_order VALUES ('18','RS-0243050','1','2','28','2','','','02/09/19','2');
+INSERT INTO sales_order VALUES ('19','RS-399042','1','35','24','35','','','02/09/19','1');
+INSERT INTO sales_order VALUES ('20','RS-399042','1','10','42','10','','','02/09/19','1');
+INSERT INTO sales_order VALUES ('21','RS-399042','1','5','26','5','','','02/09/19','1');
 
 
 
@@ -348,7 +359,6 @@ CREATE TABLE `user` (
 --INSERTING DATA INTO user
 INSERT INTO user VALUES ('3','cashier','cashier','Cashier','Cashier');
 INSERT INTO user VALUES ('4','waiter','waiter','Waiter','Waiter');
-INSERT INTO user VALUES ('5','Ernest','6741','Ernest Ansah','Waiter');
 INSERT INTO user VALUES ('6','Rose ','2397','Rose','Waiter');
 INSERT INTO user VALUES ('7','Marshall ','3173 ','Marshall  Dewude','Waiter');
 INSERT INTO user VALUES ('8','Gyan','7016','Luckie Lawson','Admin');

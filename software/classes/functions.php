@@ -1439,8 +1439,8 @@ if($GetSession->loggedin== TRUE):
  
 
 
-$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, tid, sid, hall, balance, ord_type, kitchen) 
- VALUES (:invoice_number, :cashier, :date, :amount, :discount, :tid, :sid,:hall, :balance, :ord_type, :kitchen)"); 
+$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, vat, nhil, fund, discount, tid, sid, hall, balance, ord_type, kitchen) 
+ VALUES (:invoice_number, :cashier, :date, :amount, :vat, :nhil, :fund, :discount, :tid, :sid,:hall, :balance, :ord_type, :kitchen)"); 
  
  
  $stmt->bindParam(':invoice_number', $_POST['invoice'], PDO::PARAM_STR); 
@@ -1459,6 +1459,21 @@ $stmt->bindParam(':balance', $balance, PDO::PARAM_STR);
 $stmt->bindParam(':ord_type', $ord_type, PDO::PARAM_STR);  
 
 $stmt->bindParam(':kitchen', $_POST['kitchen']);
+
+$vatPercentage = 12.5;
+$vat = ($vatPercentage / 100) * $amount; 
+$stmt->bindParam(':vat', $vat);
+
+$nhilPercentage = 0.025;
+$nhil = $nhilPercentage * $amount;
+$stmt->bindParam(':nhil', $nhil);
+ 
+
+$fundPercentage = 0.025;
+$fund = $fundPercentage * $amount;
+$stmt->bindParam(':fund', $fund);
+ 
+
 if ($stmt->execute()): 
  
 	$loadTblCond = self::loadTblCond('sales_order','invoice',$_POST['invoice']);
@@ -1505,10 +1520,20 @@ if($GetSession->loggedin== TRUE):
         }
 ////now update the sales using the invoice numner
 
- 
-$updateClass = $conn->db->prepare("UPDATE sales SET amount=  :total, balance=  :balance WHERE invoice_number= :invoice ");
 
- if($updateClass->execute(array(':total'=>$total, ':balance'=>$balance,':invoice'=> $invoice))):
+$vatPercentage = 12.5;
+$vat = ($vatPercentage / 100) * $total;  
+
+$nhilPercentage = 0.025;
+$nhil = $nhilPercentage * $total; 
+ 
+
+$fundPercentage = 0.025;
+$fund = $fundPercentage * $total; 
+ 
+$updateClass = $conn->db->prepare("UPDATE sales SET amount=  :total, balance=  :balance, vat=  :vat, fund=  :fund, nhil=  :nhil WHERE invoice_number= :invoice ");
+
+ if($updateClass->execute(array(':total'=>$total, ':balance'=>$balance, ':vat'=>$vat, ':fund'=>$fund, ':nhil'=>$nhil,':invoice'=> $invoice))):
 
 return 1; else: return 0; endif; 
 
@@ -1542,8 +1567,8 @@ if($GetSession->loggedin== TRUE):
 
  $date=$_GET['date'];
   //return 	$balance;	
-$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, balance, ord_type) 
- VALUES (:invoice_number, :cashier, :date, :amount, :discount, :balance, :ord_type)"); 
+$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, balance, vat, nhil, fund, ord_type) 
+ VALUES (:invoice_number, :cashier, :date, :amount, :discount, :balance, :vat, :nhil, :fund, :ord_type)"); 
  
 $stmt->bindParam(':invoice_number', $invoice, PDO::PARAM_STR); 
 $stmt->bindParam(':cashier', $_GET['cashier'], PDO::PARAM_STR); 
@@ -1553,18 +1578,33 @@ $stmt->bindParam(':discount', $discount, PDO::PARAM_STR);
 
 $stmt->bindParam(':balance', $balance, PDO::PARAM_STR);  
 $stmt->bindParam(':ord_type', $ord_type, PDO::PARAM_STR);  
+
+$vatPercentage = 12.5;
+$vat = ($vatPercentage / 100) * $amount; 
+$stmt->bindParam(':vat', $vat);
+
+$nhilPercentage = 0.025;
+$nhil = $nhilPercentage * $amount;
+$stmt->bindParam(':nhil', $nhil);
+ 
+
+$fundPercentage = 0.025;
+$fund = $fundPercentage * $amount;
+$stmt->bindParam(':fund', $fund);
+ 
+
 if ($stmt->execute()): 
 
 	$loadTblCond = self::loadTblCond('sales_order','invoice',$invoice);
 		
-		for($i=1; $row= $loadTblCond->fetch();  $i++){
+		// for($i=1; $row= $loadTblCond->fetch();  $i++){
 			
-			$pnt = $conn->db->prepare("INSERT INTO printer (trans_id)  VALUES (:trans_id)"); 
-			$pnt->bindParam(':trans_id', $row['transaction_id'], PDO::PARAM_INT); 
-			$pnt->execute();
+		// 	$pnt = $conn->db->prepare("INSERT INTO printer (trans_id)  VALUES (:trans_id)"); 
+		// 	$pnt->bindParam(':trans_id', $row['transaction_id'], PDO::PARAM_INT); 
+		// 	$pnt->execute();
 			
 			
-		}
+		// }
 
 return 1; else: return 0;	endif; 
  
@@ -1605,11 +1645,27 @@ $updateClass->bindParam(':code1', $Tnum, PDO::PARAM_STR);
 $updateClass->bindParam(':id', $invoice, PDO::PARAM_STR);  
 $updateClass->execute();
 		
-			
 
-$supdateClass = $conn->db->prepare("UPDATE sales  SET amount=amount + :extra, balance=balance + :balance WHERE invoice_number=:in ");
+$oldAmount = System::getName('sales', 'invoice_number', $Tnum, 4);	
+			
+$newAmount = $oldAmount + $amount;
+
+$vatPercentage = 12.5;
+$vat = ($vatPercentage / 100) * $newAmount;  
+
+$nhilPercentage = 0.025;
+$nhil = $nhilPercentage * $newAmount; 
+ 
+
+$fundPercentage = 0.025;
+$fund = $fundPercentage * $newAmount; 
+
+$supdateClass = $conn->db->prepare("UPDATE sales  SET amount=amount + :extra, balance=balance + :balance, vat=vat, fund=fund, nhil=nhil WHERE invoice_number=:in ");
 $supdateClass->bindParam(':extra', $amount, PDO::PARAM_STR);   
 $supdateClass->bindParam(':balance', $balance, PDO::PARAM_STR);   
+$supdateClass->bindParam(':vat', $vat, PDO::PARAM_STR);   
+$supdateClass->bindParam(':fund', $fund, PDO::PARAM_STR);   
+$supdateClass->bindParam(':nhil', $nhil, PDO::PARAM_STR);   
 $supdateClass->bindParam(':in', $Tnum, PDO::PARAM_STR);  
 
 if ($supdateClass->execute()): 
@@ -1815,17 +1871,32 @@ if($updateClass->execute()){
 	
 	$invoice =  self::getColById('sales_order', 'transaction_id', $tid, 1);
 	$deduct =  self::getColById('sales_order', 'transaction_id', $tid, 3);
+
+	$oldAmount =  self::getColById('sales', 'invoice_number', $invoice, 5);
 	 
 	$oupdateClass = $conn->db->prepare("UPDATE sales_order SET status=:so  WHERE transaction_id=:tid ");
 $oupdateClass->bindParam(':so', $two, PDO::PARAM_STR);  
 $oupdateClass->bindParam(':tid', $tid, PDO::PARAM_INT);
 $oupdateClass->execute();
 
-  
+$newAmount = $oldAmount - $deduct;
+	
+$vatPercentage = 12.5;
+$vat = ($vatPercentage / 100) * $newAmount;  
 
-$supdateClass = $conn->db->prepare("UPDATE sales SET amount=amount- :deduct,   balance=balance- :bal  WHERE invoice_number=:in ");
+$nhilPercentage = 0.025;
+$nhil = $nhilPercentage * $newAmount; 
+ 
+
+$fundPercentage = 0.025;
+$fund = $fundPercentage * $newAmount; 
+
+$supdateClass = $conn->db->prepare("UPDATE sales SET amount=amount- :deduct,   balance=balance- :bal, vat=vat, nhil=nhil, fund=fund  WHERE invoice_number=:in ");
 $supdateClass->bindParam(':deduct', $deduct);  
 $supdateClass->bindParam(':bal', $deduct);  
+$supdateClass->bindParam(':vat', $vat); 
+$supdateClass->bindParam(':nhil', $nhil); 
+$supdateClass->bindParam(':fund', $fund); 
 $supdateClass->bindParam(':in', $invoice);
 $supdateClass->execute();
 

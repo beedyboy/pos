@@ -494,8 +494,28 @@ $.ajax({
 				}
 		});
    
-  });
-  
+	});
+	 
+	//view tax, nhil, levy
+	$(document).on('click', '.viewTax', function(){
+		var v = $(this).attr('id'); 
+		// console.log(v);
+	 $.ajax({
+			 url:"viewtaxothers.php",
+			 type: "GET",
+			 data: ({transaction_id: v}), 
+				success:function(data)
+			 {   
+			
+				$('.beedy-kaydee-popup-content').html(data);
+							 showMod();
+			
+				
+				 }
+		 });
+		
+	 });
+
    $(document).on('click', '.viewSoldInvoice', function(){
    var v = $(this).html(); 
   $.ajax({

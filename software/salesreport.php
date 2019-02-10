@@ -92,12 +92,13 @@ To: <input type="text"   style="width: 223px; height:30px; padding:8px;" name="d
 <table class="table  table-responsive table-bordered" id="resultTable" data-responsive="table" style="text-align: left;">
 	<thead>
 		<tr>
-			<th width="15%"> Transaction ID </th>
-			<th width="20%"> Cashier </th>
-			<th width="15%"> Transaction Date </th> 
-			<th width="15%"> Invoice Number </th>
-			<th width="15%"> Amount Gh&cent; </th> 
-			<th width="20%"> Status </th> 
+			<th width="10%"> Transaction ID </th>
+			<th width="18%"> Cashier </th>
+			<th width="14%"> Transaction Date </th> 
+			<th width="14%"> Invoice Number </th>
+			<th width="14%"> Amount Gh&cent; </th> 
+			<th width="17%"> Status </th> 
+			<th width="12%"> View Tax, NHIL, etc </th> 
 		</tr>
 	</thead>
 	<tbody>
@@ -121,6 +122,9 @@ To: <input type="text"   style="width: 223px; height:30px; padding:8px;" name="d
 			?></td>
 			 
 			 <td><?php echo $row['status']; ?></td>
+			 <td><button id="<?=$row['transaction_id']?>"	class="viewTax"  title="Click to view Tax, NHIL, and Level Fund"> 
+			 <span class="btn btn-success"><i class="icon-search"></i></span>
+			 </button> </td>
 			</tr>
 			<?php
 				}

@@ -21,5 +21,12 @@ self::$instance= new $object;
 } 
 return self::$instance; 
 } 
+
+public function getDb() {
+    if ($this->db instanceof PDO) {
+         return $this->db;
+    }
+}
+
 } 
 ?>

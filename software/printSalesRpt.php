@@ -47,7 +47,11 @@ function Clickheretoprint()
 	<thead>
 		<tr>  
 			<th > Invoice Number </th>
-			<th > Amount Gh&cent; </th>  	</tr>
+			<th > Amount Gh&cent; </th>  
+			<th > Vat Gh&cent; </th>  
+			<th > Nhil Gh&cent; </th>  
+			<th > Levy Fund Gh&cent; </th>  
+				</tr>
 	</thead>
 	<tbody>
 		
@@ -55,15 +59,33 @@ function Clickheretoprint()
 				 $d1=$_GET['d1'];
 				$d2=$_GET['d2'];
 			
-				 
+				 $vat = 0;
 				$result = System::salesReport($d1,$d2);  
 				for($i=0; $row = $result->fetch(); $i++){
+					$vat += $row['vat'];
+					$nhil += $row['nhil'];
+					$fund += $row['fund'];
 			?>
 			<tr class="record">
 			  
 			<td class='viewSoldInvoice'><?php echo $row['invoice_number']; ?></td>
 			<td><?php
 			$dsdsd=$row['amount'];
+			echo System::formatMoney($dsdsd, true);
+			?></td>
+			 
+			 <td><?php
+			$dsdsd=$row['vat'];
+			echo System::formatMoney($dsdsd, true);
+			?></td>
+			 
+			 <td><?php
+			$dsdsd=$row['nhil'];
+			echo System::formatMoney($dsdsd, true);
+			?></td>
+			 
+			 <td><?php
+			$dsdsd=$row['fund'];
 			echo System::formatMoney($dsdsd, true);
 			?></td>
 			 
@@ -75,7 +97,7 @@ function Clickheretoprint()
 		
 	</tbody>
 	<thead>
-		<tr>
+		<tr class="text text-info">
 			<th style="border-top:1px solid #999999"> Total: </th>
 			<th  style="border-top:1px solid #999999">Gh&cent; 
 			<?php 
@@ -87,6 +109,19 @@ function Clickheretoprint()
 				echo System::formatMoney($dsdsd, true);
 				}
 				?>
+			</th>
+			<th  style="border-top:1px solid #999999">Gh&cent; 
+			<?php 
+		 
+				echo System::formatMoney($vat, true);
+				 
+				?>
+			</th>
+			<th  style="border-top:1px solid #999999">Gh&cent; 
+			<?=System::formatMoney($nhil, true); ?>
+			</th>
+			<th  style="border-top:1px solid #999999">Gh&cent; 
+			<?=System::formatMoney($fund, true); ?>
 			</th>
 				 
 		</tr>

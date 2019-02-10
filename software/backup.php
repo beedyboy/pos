@@ -19,7 +19,7 @@ if(!$backup['error']){
  
 $fp = fopen('file.sql', 'w');fwrite($fp, $backup['msg']);fclose($fp);
 ?>
-<button class="btn btn-success">Back up successful<button>
+<button class="btn btn-success">Back up successful</button>
 <?php
 } else {
 	echo 'An error has ocurred.';
