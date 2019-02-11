@@ -22,7 +22,7 @@ $head = "Sales Report \t"."-".$day."\t"."-".$time;
 
  $output = fopen('php://output', 'w');
  //fputcsv($output, $head);
-fputcsv($output, array('Transaction Id','Cashier', ' Date', 'Invoice Number ', 'Vat (12.5%)', 'Nhil (2.5%)', 'Fund Levy (2.5%)', 'Amount'));
+fputcsv($output, array('Transaction Id','Cashier', ' Date', 'Invoice Number ', 'Vat (12.5%)', 'Nhil (2.5%)', 'Fund Levy (2.5%)', 'Amount', 'Grand Total'));
   
 if(!empty($resultClass)): ?>
  
@@ -35,7 +35,8 @@ $row=array($LIST['transaction_id'],	$LIST['cashier'],
  $LIST['date'], $LIST['invoice_number'],
  System::formatMoney($LIST['vat']), System::formatMoney($LIST['nhil']), 
  System::formatMoney($LIST['fund']),
- System::formatMoney($LIST['amount']));
+ System::formatMoney($LIST['amount']),
+ System::formatMoney(System::getColById('sales', 'invoice_number', $LIST['invoice_number'], 4)));
 
 fputcsv($output, $row);
 ?> 

@@ -122,7 +122,7 @@ function FancyTable($header, $data)
 	$this->SetLineWidth(.3);
 	$this->SetFont('','B');
 	// Header
-	$w = array(  50, 45, 45, 45);
+	$w = array(  40, 40, 40, 40,40);
 	for($i=0;$i<count($header);$i++)
 		$this->Cell($w[$i],7,$header[$i],1,0,'C',true);
 	$this->Ln();
@@ -145,9 +145,12 @@ $this->Cell($w[0],6, $LIST['cashier'],'LR',0,'C',$fill);
 $this->Cell($w[1],6,$LIST['date'],'LR',0,'C',$fill);
 $this->Cell($w[2],6, $LIST['invoice_number'],'LR',0,'C',$fill);
 $this->Cell($w[3],6,System::formatMoney($LIST['amount'], true),'LR',0,'C',$fill);
+$this->Cell($w[3],6,System::formatMoney(System::getColById('sales', 'invoice_number', $LIST['invoice_number'], 4)),'LR',0,'C',$fill);
 $this->Ln();
 $fill = !$fill;
 }
+
+
  
 	// Closing line
 	$this->Cell(array_sum($w),0,'','T');
@@ -172,7 +175,7 @@ $total = 0;
 
 $pdf = new PDF();
 // Column headings
-$header = array( 'Cashier', ' Date', 'Invoice Number ', 'Amount');
+$header = array( 'Cashier', ' Date', 'Invoice Number ', 'Amount', 'Grand Total');
 // Data loading
 //$data = $pdf->loadData($GetExam, $stdAddNum,$genStdBatchId,$SchoolTermId);
 $pdf->SetFont('Arial','',14);
