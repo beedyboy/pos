@@ -1490,10 +1490,12 @@ return false;
 		
 	//billPrint
 	$( document ).on( "click", ".billPrint", function() { 
-				var id = $(this).attr("name"); 
+		var id = $(this).attr("id");  
+		console.log(id);
+		var invoice = $(this).attr("name"); 
 	  var disp_setting="toolbar=yes,location=no,directories=yes,menubar=yes,"; 
       disp_setting+="scrollbars=yes,width=800, height=400, left=100, top=25"; 
-	 window.open("billPrint.php?id="+id,"",disp_setting);
+	 window.open("billPrint.php?id="+id+ "&invoice="+invoice,"",disp_setting);
 return false;	 
    
 				 

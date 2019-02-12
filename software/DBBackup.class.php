@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '8192M'); 
 /**
  *
  * Use this class to do a backup of your database

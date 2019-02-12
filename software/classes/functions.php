@@ -2398,16 +2398,14 @@ foreach ($qry as $value)
 
 #############################delete functions###########################################
 
-
-
-
-public static function createRandomPassword() {
-	$chars = "003232303232023232023456789";
+ 
+public static function PasswordDecider() {
+	$chars = "01012323453456456789";
 	srand((double)microtime()*1000000);
 	$i = 0;
 	$pass = '' ;
-	while ($i <= 7) {
-
+	while ($i <= 9) {
+ 
 		$num = rand() % 33;
 
 		$tmp = substr($chars, $num, 1);
@@ -2417,7 +2415,29 @@ public static function createRandomPassword() {
 		$i++;
 
 	}
-	return "RS-".$pass;
+	return $pass;
+}
+
+public static function createRandomPassword() {
+	$chars1 = self::PasswordDecider();
+	$chars2 = self::PasswordDecider();
+	$chars = $chars1 + $chars2;
+	srand((double)microtime()*1000000);
+	$i = 0;
+	$pass = '' ;
+	while ($i <= 7) {
+ 
+		$num = rand() % 33;
+
+		$tmp = substr($chars, $num, 1);
+
+		$pass = $pass . $tmp;
+
+		$i++;
+
+	}
+	$last = $pass + $chars2;
+	return "MG-".$last;
 }
 
 

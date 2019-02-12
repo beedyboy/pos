@@ -107,7 +107,7 @@ INSERT INTO products VALUES ('19','Goat Meat','15','200','L','17','15','1');
 INSERT INTO products VALUES ('20','Fufu 5','5','33','L','13','5','1');
 INSERT INTO products VALUES ('21','Vodka','12','50','D','11','12','1');
 INSERT INTO products VALUES ('22','Red Red / Egg','15','30','SM','25','15','1');
-INSERT INTO products VALUES ('23','Jollof / Grilled Pork','30','34','C','9','30','1');
+INSERT INTO products VALUES ('23','Jollof / Grilled Pork','30','33','C','9','30','1');
 INSERT INTO products VALUES ('24','Cassava Fish','35','15','F','16','35','1');
 INSERT INTO products VALUES ('26','Coke','5','39','D','21','5','1');
 INSERT INTO products VALUES ('27','Tuna Salad','20','41','C','24','20','1');
@@ -129,26 +129,26 @@ INSERT INTO products VALUES ('49','Malta ','6','29','D','11','6','1');
 INSERT INTO products VALUES ('50','SminoffIce','8','40','D','22','8','1');
 INSERT INTO products VALUES ('51','Orijin Beer L','8','72','D','22','8','1');
 INSERT INTO products VALUES ('52','Hienerken','10','16','D','22','10','1');
-INSERT INTO products VALUES ('53','savana Dry ','8','28','D','11','8','1');
+INSERT INTO products VALUES ('53','savana Dry ','8','27','D','11','8','1');
 INSERT INTO products VALUES ('54','Hunters Gold ','8','33','D','22','8','1');
-INSERT INTO products VALUES ('55','GUINNEESS','8','75','D','11','8','1');
-INSERT INTO products VALUES ('56','Orijin O','5','17','D','11','5','1');
+INSERT INTO products VALUES ('55','GUINNEESS','8','74','D','11','8','1');
+INSERT INTO products VALUES ('56','Orijin O','5','16','D','11','5','1');
 INSERT INTO products VALUES ('57','Orijin M','6','11','D','11','6','1');
 INSERT INTO products VALUES ('58','Mangos Sobolo','5','49','D','21','5','1');
 INSERT INTO products VALUES ('59','Shandy L','8','16','D','11','8','1');
 INSERT INTO products VALUES ('68','Dry Fish','25','20','L','20','25','1');
 INSERT INTO products VALUES ('69','Grasscutter','15','20','L','19','15','1');
 INSERT INTO products VALUES ('70','Fried Rice / Grilled chicken','25','23','C','9','25','1');
-INSERT INTO products VALUES ('71','Jollof / Grilled Chicken','25','43','C','9','25','1');
+INSERT INTO products VALUES ('71','Jollof / Grilled Chicken','25','41','C','9','25','1');
 INSERT INTO products VALUES ('72','Assorted  Jollof ','35','788','C','9','35','1');
 INSERT INTO products VALUES ('73','Banku /  GrilledTilapia','40','26','C','18','40','1');
-INSERT INTO products VALUES ('74','Banku /  Grilled Tilapia L','45','40','C','18','45','1');
-INSERT INTO products VALUES ('75','Banku / Grilled Tilapia XL','50','41','C','18','50','1');
+INSERT INTO products VALUES ('74','Banku /  Grilled Tilapia L','45','39','C','18','45','1');
+INSERT INTO products VALUES ('75','Banku / Grilled Tilapia XL','50','40','C','18','50','1');
 INSERT INTO products VALUES ('76','Yam / Grilled Pork','30','50','C','10','30','1');
-INSERT INTO products VALUES ('77','Fried Rice / Grilled Pork','30','21','C','9','30','1');
-INSERT INTO products VALUES ('78','Fried Rice/ Fish','30','19','C','9','30','1');
+INSERT INTO products VALUES ('77','Fried Rice / Grilled Pork','30','19','C','9','30','1');
+INSERT INTO products VALUES ('78','Fried Rice/ Fish','30','17','C','9','30','1');
 INSERT INTO products VALUES ('79','Jollof / Fish','30','15','C','9','30','1');
-INSERT INTO products VALUES ('80','Plain Rice / Fish','30','1','C','9','30','1');
+INSERT INTO products VALUES ('80','Plain Rice / Fish','30','0','C','9','30','1');
 
 
 
@@ -229,6 +229,10 @@ INSERT INTO sales VALUES ('53','RS-076000','ADMINISTRATOR','2019-02-06','90','',
 INSERT INTO sales VALUES ('54','RS-402033','ADMINISTRATOR','2019-02-06','60','','60','PENDING','','','','Take-Out','','','','Bar');
 INSERT INTO sales VALUES ('55','RS-0243050','ADMINISTRATOR','2019-02-09','47','','47','PENDING','','','','Take-Out','','','','Bar');
 INSERT INTO sales VALUES ('56','RS-399042','ADMINISTRATOR','2019-02-09','50','','50','PAID','2','1','6','Take In','1.25','1.25','6.25','Continental');
+INSERT INTO sales VALUES ('57','RS-003322','ADMINISTRATOR','2019-02-11','70.5','','70.5','PENDING','','','','Take-Out','1.5','1.5','7.5','Bar');
+INSERT INTO sales VALUES ('58','RS-034520','ADMINISTRATOR','2019-02-11','99.875','','99.875','PENDING','11','8','6','Take-In','2.125','2.125','10.625','Local');
+INSERT INTO sales VALUES ('59','RS-2233227','ADMINISTRATOR','2019-02-11','115.15','','115.15','PENDING','','','','Take-Out','2.45','2.45','12.25','Bar');
+INSERT INTO sales VALUES ('60','RS-3303525','ADMINISTRATOR','2019-02-11','144.525','','144.525','PENDING','2','1','6','Take-In','3.075','3.075','15.375','Continental');
 
 
 
@@ -269,6 +273,21 @@ INSERT INTO sales_order VALUES ('18','RS-0243050','1','2','28','2','','','02/09/
 INSERT INTO sales_order VALUES ('19','RS-399042','1','35','24','35','','','02/09/19','1');
 INSERT INTO sales_order VALUES ('20','RS-399042','1','10','42','10','','','02/09/19','1');
 INSERT INTO sales_order VALUES ('21','RS-399042','1','5','26','5','','','02/09/19','1');
+INSERT INTO sales_order VALUES ('23','RS-003322','1','30','23','30','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('24','RS-003322','1','30','80','30','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('25','RS-034520','1','30','77','30','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('26','RS-034520','1','25','71','25','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('27','RS-034520','1','30','78','30','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('28','RS-2233227','1','30','77','30','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('29','RS-2233227','1','25','71','25','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('30','RS-2233227','1','8','53','8','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('31','RS-2233227','1','30','78','30','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('32','RS-2233227','1','5','56','5','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('33','RS-3303525','1','5','20','5','','','02/11/19','2');
+INSERT INTO sales_order VALUES ('34','RS-3303525','1','15','69','15','','','02/11/19','2');
+INSERT INTO sales_order VALUES ('35','RS-3303525','1','8','55','8','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('36','RS-3303525','1','50','75','50','','','02/11/19','1');
+INSERT INTO sales_order VALUES ('37','RS-3303525','1','45','74','45','','','02/11/19','1');
 
 
 
