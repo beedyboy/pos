@@ -40,7 +40,7 @@
 	{ 
 	$sub_array = array();   
 	$sub_array[] =   $row['transaction_id'];
-	$sub_array[] =   $row['date'];
+	$sub_array[] =   $row['created_on'];
 	 
 	$sub_array[] =   $row['cashier'];
 	$sub_array[] =   $row['kitchen'];

@@ -92,13 +92,13 @@ $query =  "SELECT * FROM sales_order WHERE  invoice = '".$invoice."'  ";
 			</td>
 		</tr>
 		<tr>
-			<td>Cashier</td>
+			<td>Attended to by: </td>
 			<td> <?php echo System::getColById2('sales', 'invoice_number', 'transaction_id', $invoice, $id,2); ?></td>
 		</tr>
 		
 		<tr>
 			<td>Date</td>
-			<td><?php echo System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 3); ?></td>
+			<td><?php echo System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 16); ?></td>
 		</tr>  
 	</table>
 	</div>	
@@ -165,21 +165,21 @@ echo System::formatMoney(  $row['amount'], true); //amt
 								}
 
 							 ?>
-	<tr class="tabletitle">
+	<!-- <tr class="tabletitle">
 								<td></td>
 								<td colspan="3"  style=" text-align:right;" class="Rate"> Subtotal: 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
 								<td  colspan="1" class="payment"><?php
 				 
 					 
-					$resultas = System::amountSumSalesOrder($invoice); 
-					for($i=0; $rowas = $resultas->fetch(); $i++){
-					$fgfg=$rowas['sum(amount)'];
-					echo System::formatMoney($fgfg, true);
-					}
+					// $resultas = System::amountSumSalesOrder($invoice); 
+					// for($i=0; $rowas = $resultas->fetch(); $i++){
+					// $fgfg=$rowas['sum(amount)'];
+					// echo System::formatMoney($fgfg, true);
+					// }
 					?></h2></td>
 							</tr>
-							 
+							  -->
 						 
 							<tr class="tabletitle">
 								<td></td>
@@ -187,7 +187,7 @@ echo System::formatMoney(  $row['amount'], true); //amt
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
 								<td  colspan="1" class="payment"><?php
 					   
-					echo System::formatMoney(System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 12), true); ?>
+					// echo System::formatMoney(System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 12), true); ?> 0
 					</h2></td>
 							</tr>
 							 
@@ -195,8 +195,9 @@ echo System::formatMoney(  $row['amount'], true); //amt
 								<td></td>
 								<td colspan="3"  style=" text-align:right;" class="Rate"> Get Fund Levy (2.5%): 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
-								<td  colspan="1" class="payment"><?php
-						 echo System::formatMoney(System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 13), true); 
+								<td  colspan="1" class="payment">0
+									<?php
+						//  echo System::formatMoney(System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 13), true); 
 						 ?>
 						  
 					</h2></td>
@@ -206,8 +207,8 @@ echo System::formatMoney(  $row['amount'], true); //amt
 								<td></td>
 								<td colspan="3"  style=" text-align:right;" class="Rate"> VAT (12.5%): 
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2></td>
-								<td  colspan="1" class="payment"><?php
-					 echo System::formatMoney(System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 14), true); 
+								<td  colspan="1" class="payment">0<?php
+					//  echo System::formatMoney(System::getColById2('sales', 'invoice_number','transaction_id', $invoice, $id, 14), true); 
 					 ?>
 					</h2></td>
 							</tr>
@@ -228,6 +229,8 @@ echo System::formatMoney(  $row['amount'], true); //amt
 	<p class="legal">
 						 
 						<strong>Thank you for your business!</strong>  <hr /> 
+
+						 
 						<span  style="font-size: 10px;"> Powered by Techanow (www.techanow.com) <br />
 						0263128007 | 0243383359 | +2347037351836</span>
 						 

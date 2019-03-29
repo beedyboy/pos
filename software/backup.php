@@ -3,8 +3,8 @@ include 'DBBackup.class.php';
 $db = new DBBackup(array(
 	'driver' => 'mysql',
 	'host' => '127.0.0.1',
-	'user' => 'beedy',
-	'password' => 'kaydee',
+	'user' => 'root',
+	'password' => '',
 	'database' => 'beedypos'
 ));
 $backup = $db->backup();

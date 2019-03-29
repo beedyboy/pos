@@ -75,6 +75,8 @@ $active = "Products";
 			<th > Price Gh&cent;</th> 
 			<th> Qty Left </th>
 			<th> Total Gh&cent;</th>
+			<th> Created On</th>
+			<th> Updated On</th>
 			<?php if($GetSession->position=="Admin"): ?><th width="10%"> Action </th> <?php endif; ?>
 		</tr>
 	</thead>

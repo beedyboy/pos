@@ -3,22 +3,12 @@ include('auth.php');
 
 $conn = Database::getInstance();
 
-$select = $conn->db->prepare("UPDATE `sales` SET  `date`= '2018-05-16'   WHERE `date`= '2018-05-17' ");
-$select->execute();
+$product = $conn->db->prepare("ALTER TABLE `products` ADD `created_on` VARCHAR(30) NULL AFTER `checks`, ADD `updated_on` VARCHAR(30) NULL AFTER `created_on`");
+
+ $product->execute();
 
 
-$select = $conn->db->prepare("UPDATE `sales` SET  `date`= '2018-05-16'   WHERE `date`= '2018-05-18' ");
-$select->execute();
-
-
-$select = $conn->db->prepare("UPDATE `sales_order` SET  `date`= '05/16/18'  WHERE `date`= '05/18/18'
-");
- $select->execute();
-
-
-
-$select = $conn->db->prepare("UPDATE `sales_order` SET  `date`= '05/16/18'  WHERE `date`= '05/17/18'
-");
+$select = $conn->db->prepare("ALTER TABLE `sales` ADD `created_on` VARCHAR(30) NULL AFTER `kitchen`");
 if($select->execute()): 
 
 	echo "Data Updated Successfully";

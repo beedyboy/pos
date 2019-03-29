@@ -73,7 +73,7 @@ $active = "Account Receivables";
 	<tr> 
                             <th  width="7%">Trans  ID </th> 
                             <th width="9%">Date</th>  
-                            <th width="11%">Cashier</th>  
+                            <th width="11%">Waiter</th>  
                             <th width="9%">Kitchen</th>  
 
                             <th width="15%">Invoice No </th> 

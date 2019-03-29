@@ -612,17 +612,19 @@ if($_POST['main'] == "C"):
 endif;
 
 //$price = $s_price + $vat;
-
+$ct = self::CreatedOn();
  //return $quantity;
-$stmt = $conn->db->prepare("INSERT INTO products ( product_name, selling_price, qty_left, main, subId,  price, checks) 
-VALUES (:product_name,:selling_price,:qty_left,:main, :subId,  :price, :check )"); 
+$stmt = $conn->db->prepare("INSERT INTO products ( product_name, selling_price, qty_left, main, subId,  price, checks,created_on) 
+VALUES (:product_name,:selling_price,:qty_left,:main, :subId,  :price, :check, :created_on )"); 
 $stmt->bindParam(':product_name', $_POST['product_name'], PDO::PARAM_STR); 
 $stmt->bindParam(':selling_price', $s_price, PDO::PARAM_STR);  
 $stmt->bindParam(':qty_left', $quantity, PDO::PARAM_STR);  
 $stmt->bindParam(':main', $_POST['main'], PDO::PARAM_STR); 
 $stmt->bindParam(':subId', $_POST['subId'], PDO::PARAM_STR);  
-$stmt->bindParam(':price', $s_price, PDO::PARAM_STR); 
+$stmt->bindParam(':price', $s_price, PDO::PARAM_STR);
+$stmt->bindParam(':created_on', $ct); 
 //$stmt->bindParam(':vat', $vat, PDO::PARAM_STR);
+
 $stmt->bindParam(':check', $check);
 if ($stmt->execute()): return 1; 	else: return 0;	endif;
  }
@@ -1409,6 +1411,9 @@ return 10;
 endif;
 }
 
+public static function CreatedOn(){
+return   date('Y-m-d H:i:sa');
+}
 public static function saveOrder(){
 $conn = Database::getInstance();
  global $GetSession; 
@@ -1419,7 +1424,7 @@ if($GetSession->loggedin== TRUE):
 	$resultas = self::amountSumSalesOrder($invoice);
 				 
 				for($i=0; $rowas = $resultas->fetch(); $i++){
-				$amount =  $rowas['sum(amount)'];
+			$balance = 	$amount =  $rowas['sum(amount)'];
 			 
 				}
 				
@@ -1444,18 +1449,18 @@ $nhil = $nhilPercentage * $amount;
 $fundPercentage = 0.025;
 $fund = $fundPercentage * $amount;
 
- $balance = $lastprice = $amount + $vat + $nhil + $fund; 
+ $lastprice = $amount + $vat + $nhil + $fund; 
  
 
 
-$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, vat, nhil, fund, discount, tid, sid, hall, balance, ord_type, kitchen) 
- VALUES (:invoice_number, :cashier, :date, :amount, :vat, :nhil, :fund, :discount, :tid, :sid,:hall, :balance, :ord_type, :kitchen)"); 
+$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, tid, sid, hall, balance, ord_type, kitchen, created_on) 
+ VALUES (:invoice_number, :cashier, :date, :amount, :discount, :tid, :sid,:hall, :balance, :ord_type, :kitchen, :created_on)"); 
  
- 
+
  $stmt->bindParam(':invoice_number', $_POST['invoice'], PDO::PARAM_STR); 
 $stmt->bindParam(':cashier', $_POST['cashier'], PDO::PARAM_STR); 
 $stmt->bindParam(':date', $date); 
-$stmt->bindParam(':amount', $lastprice, PDO::PARAM_STR); 
+$stmt->bindParam(':amount', $amount, PDO::PARAM_STR); 
 $stmt->bindParam(':discount', $discount, PDO::PARAM_STR); 
  
 $stmt->bindParam(':tid', $_POST['tid'], PDO::PARAM_INT); 
@@ -1468,9 +1473,10 @@ $stmt->bindParam(':balance', $balance, PDO::PARAM_STR);
 $stmt->bindParam(':ord_type', $ord_type, PDO::PARAM_STR);  
 
 $stmt->bindParam(':kitchen', $_POST['kitchen']);
-$stmt->bindParam(':vat', $vat);
-$stmt->bindParam(':nhil', $nhil);
-$stmt->bindParam(':fund', $fund);
+$stmt->bindParam(':created_on', self::CreatedOn());
+// $stmt->bindParam(':vat', $vat);
+// $stmt->bindParam(':nhil', $nhil);
+// $stmt->bindParam(':fund', $fund);
 
  
 
@@ -1515,7 +1521,7 @@ if($GetSession->loggedin== TRUE):
  $resultas = System::amountSumSalesOrder($invoice);
          $total = 0;
         for($i=0; $rowas = $resultas->fetch(); $i++){
-         $total=$rowas['sum(amount)'];
+       $balance =   $total=$rowas['sum(amount)'];
         // echo System::formatMoney($total, true);
         }
 ////now update the sales using the invoice numner
@@ -1533,11 +1539,10 @@ $fund = $fundPercentage * $total;
 
 $lastprice = $total + $vat + $nhil + $fund; 
  
-$balance = $lastprice;
+ 
+$updateClass = $conn->db->prepare("UPDATE sales SET amount=  :total, balance=  :balance  WHERE invoice_number= :invoice ");
 
-$updateClass = $conn->db->prepare("UPDATE sales SET amount=  :total, balance=  :balance, vat=  :vat, fund=  :fund, nhil=  :nhil WHERE invoice_number= :invoice ");
-
- if($updateClass->execute(array(':total'=>$lastprice, ':balance'=>$balance, ':vat'=>$vat, ':fund'=>$fund, ':nhil'=>$nhil,':invoice'=> $invoice))):
+ if($updateClass->execute(array(':total'=>$total, ':balance'=>$balance,  ':invoice'=> $invoice))):
 
 return 1; else: return 0; endif; 
 
@@ -1559,7 +1564,7 @@ if($GetSession->loggedin== TRUE):
 				$resultas = self::amountSumSalesOrder($invoice);
 				 
 				for($i=0; $rowas = $resultas->fetch(); $i++){
-				$amount = $rowas['sum(amount)'];
+			$balance = 	$amount = $rowas['sum(amount)'];
 			 
 				}
 				
@@ -1579,27 +1584,28 @@ if($GetSession->loggedin== TRUE):
  
  $fundPercentage = 0.025;
  $fund = $fundPercentage * $amount;
- $balance = $lastprice = $amount + $vat + $nhil + $fund; 
+ $lastprice = $amount + $vat + $nhil + $fund; 
 	 
   //return 	$balance;	
-$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, balance, vat, nhil, fund, ord_type) 
- VALUES (:invoice_number, :cashier, :date, :amount, :discount, :balance, :vat, :nhil, :fund, :ord_type)"); 
+$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, balance,  ord_type, created_on) 
+ VALUES (:invoice_number, :cashier, :date, :amount, :discount, :balance,   :ord_type, :created_on)"); 
  
 $stmt->bindParam(':invoice_number', $invoice, PDO::PARAM_STR); 
 $stmt->bindParam(':cashier', $_GET['cashier'], PDO::PARAM_STR); 
 $stmt->bindParam(':date', $date); 
-$stmt->bindParam(':amount', $lastprice, PDO::PARAM_STR); 
+$stmt->bindParam(':amount', $amount, PDO::PARAM_STR); 
 $stmt->bindParam(':discount', $discount, PDO::PARAM_STR);
 
 $stmt->bindParam(':balance', $balance, PDO::PARAM_STR);  
 $stmt->bindParam(':ord_type', $ord_type, PDO::PARAM_STR);  
  
-$stmt->bindParam(':vat', $vat);
+$stmt->bindParam(':created_on', self::CreatedOn());
+// $stmt->bindParam(':vat', $vat);
  
-$stmt->bindParam(':nhil', $nhil);
+// $stmt->bindParam(':nhil', $nhil);
  
  
-$stmt->bindParam(':fund', $fund);
+// $stmt->bindParam(':fund', $fund);
  
 
 if ($stmt->execute()): 
@@ -1656,26 +1662,26 @@ $updateClass->execute();
 
 $oldAmount = System::getName('sales', 'invoice_number', $Tnum, 4);	
 			
-$newAmount = $oldAmount + $amount;
+$balance = $newAmount = $oldAmount + $amount;
 
-$vatPercentage = 12.5;
-$vat = ($vatPercentage / 100) * $newAmount;  
+// $vatPercentage = 12.5;
+// $vat = ($vatPercentage / 100) * $newAmount;  
 
-$nhilPercentage = 0.025;
-$nhil = $nhilPercentage * $newAmount; 
+// $nhilPercentage = 0.025;
+// $nhil = $nhilPercentage * $newAmount; 
  
 
-$fundPercentage = 0.025;
-$fund = $fundPercentage * $newAmount; 
+// $fundPercentage = 0.025;
+// $fund = $fundPercentage * $newAmount; 
 			
-$balance = $lastprice = $newAmount + $vat + $nhil + $fund; 
+$amount = $newAmount + $vat + $nhil + $fund; 
  
-$supdateClass = $conn->db->prepare("UPDATE sales  SET amount= :extra, balance= :balance, vat=vat, fund=fund, nhil=nhil WHERE invoice_number=:in ");
-$supdateClass->bindParam(':extra', $lastprice, PDO::PARAM_STR);   
+$supdateClass = $conn->db->prepare("UPDATE sales  SET amount= :extra, balance= :balance  WHERE invoice_number=:in ");
+$supdateClass->bindParam(':extra', $newAmount, PDO::PARAM_STR);   
 $supdateClass->bindParam(':balance', $balance, PDO::PARAM_STR);   
-$supdateClass->bindParam(':vat', $vat, PDO::PARAM_STR);   
-$supdateClass->bindParam(':fund', $fund, PDO::PARAM_STR);   
-$supdateClass->bindParam(':nhil', $nhil, PDO::PARAM_STR);   
+// $supdateClass->bindParam(':vat', $vat, PDO::PARAM_STR);   
+// $supdateClass->bindParam(':fund', $fund, PDO::PARAM_STR);   
+// $supdateClass->bindParam(':nhil', $nhil, PDO::PARAM_STR);   
 $supdateClass->bindParam(':in', $Tnum, PDO::PARAM_STR);  
 
 if ($supdateClass->execute()): 
@@ -1889,26 +1895,26 @@ $oupdateClass->bindParam(':so', $two, PDO::PARAM_STR);
 $oupdateClass->bindParam(':tid', $tid, PDO::PARAM_INT);
 $oupdateClass->execute();
 
-$newAmount = $oldAmount - $deduct;
+$balance =$newAmount = $oldAmount - $deduct;
 	
-$vatPercentage = 12.5;
-$vat = ($vatPercentage / 100) * $newAmount;  
+// $vatPercentage = 12.5;
+// $vat = ($vatPercentage / 100) * $newAmount;  
 
-$nhilPercentage = 0.025;
-$nhil = $nhilPercentage * $newAmount; 
+// $nhilPercentage = 0.025;
+// $nhil = $nhilPercentage * $newAmount; 
  
 
-$fundPercentage = 0.025;
-$fund = $fundPercentage * $newAmount; 
+// $fundPercentage = 0.025;
+// $fund = $fundPercentage * $newAmount; 
 
-$balance = $lastprice = $newAmount + $vat + $nhil + $fund; 
+//  $amount = $newAmount + $vat + $nhil + $fund; 
 
-$supdateClass = $conn->db->prepare("UPDATE sales SET amount= :deduct,   balance= :bal, vat=vat, nhil=nhil, fund=fund  WHERE invoice_number=:in ");
-$supdateClass->bindParam(':deduct', $lastprice);  
+$supdateClass = $conn->db->prepare("UPDATE sales SET amount= :deduct,   balance= :bal  WHERE invoice_number=:in ");
+$supdateClass->bindParam(':deduct', $newAmount);  
 $supdateClass->bindParam(':bal', $balance);  
-$supdateClass->bindParam(':vat', $vat); 
-$supdateClass->bindParam(':nhil', $nhil); 
-$supdateClass->bindParam(':fund', $fund); 
+// $supdateClass->bindParam(':vat', $vat); 
+// $supdateClass->bindParam(':nhil', $nhil); 
+// $supdateClass->bindParam(':fund', $fund); 
 $supdateClass->bindParam(':in', $invoice);
 $supdateClass->execute();
 
@@ -2066,11 +2072,11 @@ $check =1;
  }
 else{
 	$check =0;
-} 
-
+}  
+$ct = self::CreatedOn();
 $price = $_POST['selling_price'];
 $updateClass = $conn->db->prepare("UPDATE products SET product_name=:product_name,
-selling_price=:selling_price, price=:price, main=:main, subId=:subId, checks=:checks,   qty_left=:qty_left WHERE product_id=:product_id "); 
+selling_price=:selling_price, price=:price, main=:main, subId=:subId, checks=:checks,   qty_left=:qty_left, updated_on=:updated_on WHERE product_id=:product_id "); 
 $updateClass->bindParam(':product_name', $_POST['product_name'], PDO::PARAM_STR); 
 $updateClass->bindParam(':selling_price', $_POST['selling_price'], PDO::PARAM_STR);
 $updateClass->bindParam(':price', $price, PDO::PARAM_STR);
@@ -2079,6 +2085,9 @@ $updateClass->bindParam(':subId', $_POST['subId'], PDO::PARAM_STR);
 $updateClass->bindParam(':checks', $check); 
 $updateClass->bindParam(':qty_left', $_POST['qty_left'], PDO::PARAM_STR); 
 $updateClass->bindParam(':product_id', $_POST['product_id'], PDO::PARAM_INT);
+
+$updateClass->bindParam(':updated_on', $ct);
+
 if($updateClass->execute()){return 1;} else {return 0;} 
 else:
 return 10;
