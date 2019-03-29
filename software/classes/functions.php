@@ -2445,7 +2445,7 @@ public static function createRandomPassword() {
 		$i++;
 
 	}
-	$last = $pass + $chars2;
+	$last = $pass . $chars2;
 	return "MG-".$last;
 }
 

@@ -88,7 +88,7 @@ endforeach;
 
 
 <?php 
-$total_qty = '';
+$total_qty = 0;
 $total_amount = 0;
 
 foreach($sales_order as $key => $val){
