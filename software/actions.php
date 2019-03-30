@@ -1,5 +1,6 @@
 <?php
- 
+ error_reporting(E_ALL);
+ ini_set('display_errors', 0);
 require_once "classes/db.php";
 require_once "classes/functions.php";
 $conn = Database::getInstance(); 
@@ -26,7 +27,50 @@ if($_POST['action'] == "Incoming"){ echo System::Incoming();}
 
  if($_POST['action'] == "saveProduct"){ echo System::saveProduct();} 
 
-if($_POST['action'] == "saveSales"){ echo System::saveOrder();} 
+// if($_POST['action'] == "saveSales"){ echo System::saveOrder();} 
+
+
+if($_POST['action'] == "saveSales"){  
+
+    $invoice=$_POST['invoice'];
+    $ord_type=$_POST['ord_type']; 
+    $cashier = $_POST['cashier'];
+    $date = $_POST['date'];
+    $tid = $_POST['tid'];
+    $seat = $_POST['seat'];
+    $hid = $_POST['hid'];
+    $kitchen = $_POST['kitchen'];
+ 
+    $resultas = System::amountSumSalesOrder($invoice);
+				 
+    for($i=0; $rowas = $resultas->fetch(); $i++){
+$balance = 	$amount =  $rowas['sum(amount)'];
+ 
+    }
+    
+$resulta = System::discountSumSalesOrder($invoice);
+     
+    for($i=0; $qwe = $resulta->fetch(); $i++){
+ $discount=$qwe['sum(discount)'];			 
+    }
+
+    $array2 = Array(
+        "invoice number"=> $invoice,
+        "order type"=> $ord_type,
+        "cashier"=> $cashier,
+        "date"=> $date,
+        "tid"=> $tid,
+        "seat"=> $seat,
+        "hid"=> $hid,
+        "kitchen"=> $kitchen,
+        "balance"=> $balance,
+        "discount"=> $discount
+    
+    );
+    echo System::saveOrder();
+//  var_dump(($array2));
+
+} 
 
 
 if($_POST['action'] == "addToOrder"){ echo System::addToOrder();} 

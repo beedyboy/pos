@@ -811,6 +811,8 @@ $.ajax({
 	type: 'POST',
 	data: formdata,
 	success: function( result ){  
+		console.log(result);
+		// return;
 		 if(result == 1) { 
 	
  	var action =  "refreshInvoive";

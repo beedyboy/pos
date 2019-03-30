@@ -797,16 +797,13 @@ $vat = $ivat * $qty;
 $amount = $pd * $qty;
 $vat = $ivat * $qty;
   
-/**
-*This part checks for qty  if( $existCheck > 0 AND $existCheck >= $_POST['qty'] )
-{ 
-$updateClass = $conn->db->prepare("UPDATE products SET qty_left=qty_left - :qty WHERE product_id=:product_id ");
- $updateClass->execute(array(':qty'=>$qty,':product_id'=> $_POST['product_id']));
-}
+//  This part checks for qty  if( $existCheck > 0 AND $existCheck >= $_POST['qty'] )
+// { 
+// $updateClass = $conn->db->prepare("UPDATE products SET qty_left=qty_left - :qty WHERE product_id=:product_id ");
+//  $updateClass->execute(array(':qty'=>$qty,':product_id'=> $_POST['product_id']));
+// } 
+//  else {return 2; }
 
-
- else {return 2; }
-*/ 
  
  elseif($m=="S"):
 	  $qty =0; 
@@ -1453,7 +1450,7 @@ $fund = $fundPercentage * $amount;
  
 
 
-$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, date, amount, discount, tid, sid, hall, balance, ord_type, kitchen, created_on) 
+$stmt = $conn->db->prepare("INSERT INTO sales (invoice_number, cashier, `date`, amount, discount, tid, sid, hall, balance, ord_type, kitchen, created_on) 
  VALUES (:invoice_number, :cashier, :date, :amount, :discount, :tid, :sid,:hall, :balance, :ord_type, :kitchen, :created_on)"); 
  
 
@@ -1474,29 +1471,15 @@ $stmt->bindParam(':ord_type', $ord_type, PDO::PARAM_STR);
 
 $stmt->bindParam(':kitchen', $_POST['kitchen']);
 $stmt->bindParam(':created_on', self::CreatedOn());
+
 // $stmt->bindParam(':vat', $vat);
 // $stmt->bindParam(':nhil', $nhil);
-// $stmt->bindParam(':fund', $fund);
-
- 
+// $stmt->bindParam(':fund', $fund); 
 
 if ($stmt->execute()): 
  
-	$loadTblCond = self::loadTblCond('sales_order','invoice',$_POST['invoice']);
-		
-		for($i=1; $row= $loadTblCond->fetch();  $i++){
-			
-//    $made = self::existOne('printer', 'trans_id', $row['transaction_id']);
- 
-//  if($made < 1):
-// 			$pnt = $conn->db->prepare("INSERT INTO printer (trans_id)  VALUES (:trans_id)"); 
-// 			$pnt->bindParam(':trans_id', $row['transaction_id'], PDO::PARAM_INT); 
-// 			$pnt->execute(); 
-//    endif;
-			
-		}
- 
-
+	// $loadTblCond = self::loadTblCond('sales_order','invoice',$_POST['invoice']);
+	 
 
 return 1; else: return 0;	endif; 
  
